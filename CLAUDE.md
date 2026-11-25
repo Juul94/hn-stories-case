@@ -34,6 +34,29 @@ Path alias: `@/*` → `src/*`.
 - `npm run lint` · `npm run typecheck` · `npm run format` · `npm run format:check`
 - `npm test` (Vitest) · `npm run test:e2e` (Playwright)
 
+## Code style
+
+- Explaining variables: Break complex conditions and expressions into well-named
+  `const`s (e.g. `isStory`, `hasTitle`, `isAlive`) and return/use those, instead of
+  long inline boolean chains. Names should read as a sentence (is/has/should/can).
+- Guard clauses first: Handle null/undefined and invalid input with early returns
+  before defining the constants, so property access is always safe.
+
+```ts
+export function isValidStory(item: HNItem | null | undefined): item is ValidItem {
+  if (!item) return false;
+
+  const isStory = item.type === "story";
+  const isAlive = !item.deleted && !item.dead;
+  const hasTitle = typeof item.title === "string" && item.title.trim() !== "";
+  const hasAuthor = typeof item.by === "string";
+  const hasTimestamp = typeof item.time === "number";
+  const hasScore = typeof item.score === "number";
+
+  return isStory && isAlive && hasTitle && hasAuthor && hasTimestamp && hasScore;
+}
+```
+
 ## Regler
 
 - Kør `npm run lint`, `npm run typecheck`, `npm run format:check` og `npm test` efter hver ændring. Ingen commits med røde tests.
