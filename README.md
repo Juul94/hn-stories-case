@@ -24,13 +24,13 @@ Første gang e2e køres: `npx playwright install chromium`.
 
 ## Vigtige valg
 
-- **Next.js + TypeScript + SCSS.** Server Components holder HN-kaldene på serveren med indbygget caching, TypeScript strict typer API-data, og SCSS opfylder kravet om en preprocessor uden et CSS-framework.
+- **Next.js + TypeScript + SCSS.** Server Components holder HN-kaldene på serveren med indbygget caching, TypeScript i strict mode giver typesikre API-data, og SCSS opfylder kravet om en preprocessor uden et CSS-framework.
 - **Server Components hele vejen.** Data hentes på serveren; kun tema-knap, "Vis 10 nye", sorteringsvælgeren og fejlsiden er client components. Ingen API-nøgler eller fetch-logik i browseren.
 - **Tilfældigt udvalg pr. request.** `connection()` gør siden dynamisk, mens de enkelte HN-kald caches (top-liste 60 s, items 5 min, brugere 1 t).
 - **Sortering med seed.** `?seed=` styrer, hvilke 10 historier der trækkes, så `?sort=` kan sortere på serveren uden at trække nye. Uden `?sort` er rækkefølgen score stigende som krævet.
 - **Parallelle kald.** Items og brugere hentes med `Promise.allSettled`, så ét fejlende kald ikke vælter siden.
 - **Domæne adskilt fra generiske hjælpere.** Alt HN-specifikt ligger i `lib/hn/`, rene funktioner i `utils/` med unit-tests.
-- **Ingen UI-biblioteker.** SCSS Modules med variabler og mixins, én accentfarve, lyst/mørkt tema uden flash.
+- **Ingen UI-biblioteker.** SCSS Modules med variabler og mixins, én accentfarve, lyst/mørkt tema uden blink ved indlæsning.
 - **Tilgængelighed.** Semantisk `main`/`article`/`time`, synligt fokus, WCAG AA-kontrast, `prefers-reduced-motion` respekteres. Opdater-knappen bruger `aria-disabled` i stedet for `disabled`, så fokus ikke tabes under hentning.
 
 ## Edge cases
@@ -48,7 +48,7 @@ Første gang e2e køres: `npx playwright install chromium`.
 
 Projektet er bygget med Claude Code som par-programmør; jeg har styret retning, scope og kvalitet.
 
-- **Små PR'er med tidsmål.** Jeg delte opgaven i PR'er (setup → data → UI → states → e2e/CI → docs) med måltider.
+- **Små PR'er med tidsmål.** Jeg delte opgaven i små PR'er (setup → data → UI → states → e2e/CI → docs).
 - **Design.** Jeg afviste flere generiske, "AI-agtige" designforslag og satte selv den redaktionelle retning.
 - **Krav.** Jeg opdagede, at den fulde URL på hver historie (et hårdt krav) manglede, og fik den tilføjet.
 - **Scope-styring.** Undervejs prioriterede jeg krav og kvalitet over nye features og visuel polish. Sortering tilføjede jeg sent, først da alle krav, tests, CI og docs var på plads.
@@ -67,7 +67,7 @@ Projektet er bygget med Claude Code som par-programmør; jeg har styret retning,
 
 - Tema-knappens ikon og label korrekt allerede før hydrering (i dag er ikonet tomt og labelen standard, indtil klienten har hydreret).
 - Visuel regressionstest og automatisk a11y-scan (axe) i e2e.
-- Opdatere GitHub Actions til versioner, der kører native på Node 24.
+- Opdatere GitHub Actions til versioner, der kører direkte på Node 24.
 
 ## Tidsforbrug
 
