@@ -28,7 +28,13 @@ export function StoryRow({ story }: Props) {
         />
         <div className={styles.text}>
           <h3 className={styles.title}>
-            <a className={styles.titleLink} href={url} target="_blank" rel="noopener noreferrer">
+            <a
+              className={styles.titleLink}
+              href={url}
+              title={title}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {title}
               <span className="visually-hidden"> (åbner i nyt vindue)</span>
             </a>
