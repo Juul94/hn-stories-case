@@ -7,10 +7,9 @@
   --color-box: #{$light-box};
   --color-box-hover: #{$light-box-hover};
   --color-line: #{$light-line};
+  --color-line-strong: #{rgba($light-text, 0.4)};
   --color-text: #{$light-text};
   --color-meta: #{$light-meta};
-  --color-visited: #{$light-visited};
-  --color-orange: #{$light-orange};
 }
 
 @mixin dark-theme {
@@ -19,10 +18,9 @@
   --color-box: #{$dark-box};
   --color-box-hover: #{$dark-box-hover};
   --color-line: #{$dark-line};
+  --color-line-strong: #{rgba($dark-text, 0.4)};
   --color-text: #{$dark-text};
   --color-meta: #{$dark-meta};
-  --color-visited: #{$dark-visited};
-  --color-orange: #{$dark-orange};
 }
 
 // data-theme on <html> (set by the theme toggle) wins; without it, the system preference decides.
@@ -49,7 +47,7 @@
 body {
   margin: 0;
   font-family: $font-sans;
-  font-size: $font-size-title;
+  font-size: $font-size-base;
   line-height: 1.4;
   color: $color-text;
   background: $color-bg;

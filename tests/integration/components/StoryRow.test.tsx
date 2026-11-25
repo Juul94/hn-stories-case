@@ -27,9 +27,12 @@ describe("StoryRow", () => {
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
   });
 
-  it("shows domain, time, score and karma with readable labels", () => {
+  it("shows the full URL, time, score and karma with readable labels", () => {
     render(<StoryRow story={story} />);
-    expect(screen.getByText("(example.com)")).toBeInTheDocument();
+    expect(screen.getByText("https://example.com/post")).toHaveAttribute(
+      "title",
+      "https://example.com/post",
+    );
     expect(screen.getByText("25. nov. 2026, 13:00").closest("time")).toHaveAttribute(
       "datetime",
       "2026-11-25T12:00:00.000Z",
@@ -39,9 +42,14 @@ describe("StoryRow", () => {
     expect(screen.getByText(/1\.234 karma/)).toBeInTheDocument();
   });
 
-  it("shows unknown karma and the HN domain for Ask HN", () => {
-    render(<StoryRow story={{ ...story, domain: null, author: { id: "bob", karma: null } }} />);
-    expect(screen.getByText("(news.ycombinator.com)")).toBeInTheDocument();
+  it("shows unknown karma and the HN thread URL for Ask HN", () => {
+    const askUrl = "https://news.ycombinator.com/item?id=1";
+    render(
+      <StoryRow
+        story={{ ...story, url: askUrl, domain: null, author: { id: "bob", karma: null } }}
+      />,
+    );
+    expect(screen.getByText(askUrl)).toBeInTheDocument();
     expect(screen.getByText(/karma ukendt/)).toBeInTheDocument();
   });
 });

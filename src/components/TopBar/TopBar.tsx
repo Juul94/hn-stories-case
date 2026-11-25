@@ -6,7 +6,12 @@ export function TopBar() {
   return (
     <header className={styles.bar}>
       <div className={styles.inner}>
-        <h1 className={styles.title}>Hacker News</h1>
+        <h1 className={styles.title}>
+          <span className={styles.logo} aria-hidden="true">
+            HN
+          </span>
+          Hacker News
+        </h1>
         <div className={styles.actions}>
           <ThemeToggle />
           <RefreshButton />

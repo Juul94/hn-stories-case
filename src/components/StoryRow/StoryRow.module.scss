@@ -5,6 +5,7 @@
 .row {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr); // Lets the one-line URL shrink on small screens.
   grid-template-areas:
     "story"
     "meta";
@@ -22,7 +23,7 @@
   &:hover,
   &:has(.titleLink:focus-visible) {
     background: $color-box-hover;
-    border-color: $color-orange;
+    border-color: $color-line-strong;
   }
 
   // 640–1023px: score | story | author over time.
@@ -64,11 +65,15 @@
   }
 }
 
+// Lets the URL shrink and get an ellipsis inside the flex row.
+.text {
+  min-width: 0;
+}
+
 .title {
-  display: inline;
   margin: 0;
   font-size: $font-size-title;
-  font-weight: normal;
+  font-weight: 600;
   line-height: 1.35;
 }
 
@@ -77,7 +82,7 @@
   text-decoration: none;
 
   &:visited {
-    color: $color-visited;
+    color: $color-meta;
   }
 
   &:hover {
@@ -103,10 +108,19 @@
   }
 }
 
-.domain,
+.url,
 .meta {
   font-size: $font-size-meta;
   color: $color-meta;
+}
+
+// Full URL on one line; the title attribute shows it when cut off.
+.url {
+  display: block;
+  margin-top: 0.125rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .meta {
@@ -130,7 +144,7 @@
 .scoreValue {
   font-weight: bold;
   font-variant-numeric: tabular-nums;
-  color: $color-orange;
+  color: $color-text;
 
   @include tablet-up {
     font-size: $font-size-title;
@@ -160,10 +174,11 @@
   position: relative;
   z-index: 1;
   color: $color-text;
+  text-decoration-color: $color-line-strong;
+  text-underline-offset: 2px;
 
   &:hover {
-    text-decoration-color: $color-focus;
-    text-decoration-thickness: 2px;
+    text-decoration-color: currentColor;
   }
 }
 

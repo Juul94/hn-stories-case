@@ -11,7 +11,7 @@ type Props = { story: Story };
  * The title link is stretched over the whole row, so the row is clickable without wrapping it in <a>.
  */
 export function StoryRow({ story }: Props) {
-  const { title, url, domain, time, score, author } = story;
+  const { title, url, time, score, author } = story;
   const hasKarma = author.karma !== null;
   const karmaLabel = hasKarma ? `${author.karma?.toLocaleString("da-DK")} karma` : "karma ukendt";
 
@@ -26,14 +26,16 @@ export function StoryRow({ story }: Props) {
           height={40}
           unoptimized
         />
-        <div>
+        <div className={styles.text}>
           <h2 className={styles.title}>
             <a className={styles.titleLink} href={url} target="_blank" rel="noopener noreferrer">
               {title}
               <span className="visually-hidden"> (åbner i nyt vindue)</span>
             </a>
-          </h2>{" "}
-          <span className={styles.domain}>({domain ?? "news.ycombinator.com"})</span>
+          </h2>
+          <span className={styles.url} title={url}>
+            {url}
+          </span>
         </div>
       </div>
 

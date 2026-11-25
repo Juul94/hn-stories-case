@@ -1,9 +1,10 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
+// Neutral header; the orange top line is the only brand color besides the logo mark.
 .bar {
-  color: $bar-text;
-  background: $color-accent;
+  border-top: 3px solid $color-accent;
+  border-bottom: 1px solid $color-line;
 }
 
 .inner {
@@ -13,21 +14,29 @@
   gap: $space-2 $space-4;
   align-items: center;
   justify-content: space-between;
-  padding-block: $space-2;
+  padding-block: $space-3;
 }
 
-// Newsletter masthead.
 .title {
+  display: flex;
+  gap: $space-2;
+  align-items: center;
   margin: 0;
-  font-family: $font-serif;
-  font-size: 1.625rem;
-  font-weight: bold;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
 
-  @include tablet-up {
-    font-size: 2rem;
-  }
+// Small square "HN" mark.
+.logo {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.6875rem;
+  font-weight: bold;
+  color: $logo-text;
+  background: $color-accent;
 }
 
 .button {
@@ -35,22 +44,19 @@
   padding: 0 $space-3;
   font: inherit;
   font-size: $font-size-meta;
-  color: $bar-text;
+  color: $color-text;
   background: transparent;
-  border: 1px solid $bar-button-border;
+  border: 1px solid $color-line;
   border-radius: $radius-button;
   cursor: pointer;
 
-  // Blends into the bar; hover darkens it and firms up the border.
-  &:hover:not(:disabled) {
-    background: $bar-button-hover;
-    border-color: $bar-text;
+  @include motion-safe {
+    transition: $transition-theme;
   }
 
-  // The orange focus color would not show on the orange bar.
-  &:focus-visible {
-    outline: 2px solid $bar-text;
-    outline-offset: 2px;
+  &:hover:not(:disabled) {
+    background: $color-box-hover;
+    border-color: $color-line-strong;
   }
 
   &:disabled {
