@@ -13,9 +13,9 @@ export default async function Home() {
     <>
       <TopBar />
       <main className={styles.main}>
-        <p className={styles.intro}>
-          10 tilfældige topnyheder, sorteret efter score – laveste først.
-        </p>
+        <h2 className="visually-hidden">
+          10 tilfældige Hacker News-historier, sorteret efter score, laveste først
+        </h2>
         <StoryList stories={stories} />
       </main>
     </>

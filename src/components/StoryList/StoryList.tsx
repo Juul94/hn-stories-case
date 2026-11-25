@@ -10,7 +10,9 @@ export function StoryList({ stories }: Props) {
     <>
       {/* Visual column labels on desktop. Each row carries its own text labels for screen readers. */}
       <div className={styles.header} aria-hidden="true">
-        <span className={styles.headerScore}>Score</span>
+        <span className={styles.headerScore} title="Sorteret efter score, laveste først">
+          Score <span className={styles.sortArrow}>↑</span>
+        </span>
         <span>Historie</span>
         <span>Forfatter</span>
         <span>Tidspunkt</span>

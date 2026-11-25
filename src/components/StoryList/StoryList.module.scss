@@ -17,6 +17,10 @@
   text-align: right;
 }
 
+.sortArrow {
+  color: $color-meta;
+}
+
 .list {
   display: grid;
   gap: $space-2;
