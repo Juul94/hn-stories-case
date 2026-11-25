@@ -24,6 +24,7 @@ export function RefreshButton() {
         Vis 10 nye historier
       </span>
       <span className={styles.label} hidden={!isPending}>
+        <span className={styles.spinner} aria-hidden="true" />
         Henter…
       </span>
     </button>
