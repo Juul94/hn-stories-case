@@ -4,11 +4,11 @@
 // Full width with a gutter on small screens; the rows reach the edges inside it.
 .main {
   @include container;
-  padding-block: $space-3 $space-6;
+  padding-block: $space-6;
 }
 
 .intro {
-  margin: 0 0 $space-2;
+  margin: 0 0 $space-4;
   font-size: $font-size-meta;
   color: $color-meta;
 }

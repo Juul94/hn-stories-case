@@ -29,13 +29,15 @@
   font: inherit;
   font-size: $font-size-meta;
   color: $bar-text;
-  background: $bar-button-bg;
-  border: 1px solid transparent;
+  background: transparent;
+  border: 1px solid $bar-button-border;
   border-radius: $radius-button;
   cursor: pointer;
 
+  // Blends into the bar; hover darkens it and firms up the border.
   &:hover:not(:disabled) {
     background: $bar-button-hover;
+    border-color: $bar-text;
   }
 
   // The orange focus color would not show on the orange bar.

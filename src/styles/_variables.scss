@@ -25,8 +25,8 @@ $dark-visited: #b4b8be;
 $dark-orange: $hn-orange;
 
 $bar-text: #000000;
-$bar-button-bg: #ffffff;
-$bar-button-hover: #ececec;
+$bar-button-border: rgba($bar-text, 0.45);
+$bar-button-hover: rgba($bar-text, 0.12);
 
 // Semantic colors. CSS custom properties, so the color scheme switches at runtime (see globals.scss).
 $color-bg: var(--color-bg);
