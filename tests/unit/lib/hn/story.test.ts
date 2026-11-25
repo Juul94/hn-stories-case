@@ -1,5 +1,11 @@
-import { isValidStory, toStory, type ValidItem } from "@/utils/story";
-import { makeItem, makeUser } from "../mocks/fixtures";
+import { hnItemUrl, isValidStory, toStory, type ValidItem } from "@/lib/hn/story";
+import { makeItem, makeUser } from "../../../mocks/fixtures";
+
+describe("hnItemUrl", () => {
+  it("links to the HN thread", () => {
+    expect(hnItemUrl(123)).toBe("https://news.ycombinator.com/item?id=123");
+  });
+});
 
 describe("isValidStory", () => {
   it("accepts a normal story", () => {

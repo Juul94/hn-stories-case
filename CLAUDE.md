@@ -16,8 +16,8 @@ Tests: Vitest + React Testing Library + MSW (unit/integration), Playwright (e2e 
 src/
 ├── app/          # Routes: page.tsx (server), loading.tsx, error.tsx
 ├── components/   # UI-komponenter + *.module.scss
-├── lib/hn/       # HN API-klient og typer
-├── utils/        # Rene funktioner (shuffle, sort, time, url) — ingen I/O
+├── lib/hn/       # Alt HN-specifikt: api.ts, types.ts, story.ts
+├── utils/        # Generiske rene funktioner (shuffle, sort, time, url) — ingen HN-viden, ingen I/O
 └── styles/       # _variables.scss, _mixins.scss, globals.scss
 public/           # Statiske filer (placeholder.svg)
 tests/
@@ -41,6 +41,9 @@ Path alias: `@/*` → `src/*`.
   long inline boolean chains. Names should read as a sentence (is/has/should/can).
 - Guard clauses first: Handle null/undefined and invalid input with early returns
   before defining the constants, so property access is always safe.
+- Structure: group by domain (`lib/<domain>/` holds api, types and domain logic).
+  `utils/` is only for generic, domain-agnostic helpers. No global `types/` folder
+  unless types are shared across several domains.
 
 ```ts
 export function isValidStory(item: HNItem | null | undefined): item is ValidItem {

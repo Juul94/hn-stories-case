@@ -1,4 +1,4 @@
-import { getDomain, hnItemUrl } from "@/utils/url";
+import { getDomain } from "@/utils/url";
 
 describe("getDomain", () => {
   it.each([
@@ -15,10 +15,4 @@ describe("getDomain", () => {
       expect(getDomain(url)).toBeNull();
     },
   );
-});
-
-describe("hnItemUrl", () => {
-  it("links to the HN thread", () => {
-    expect(hnItemUrl(123)).toBe("https://news.ycombinator.com/item?id=123");
-  });
 });

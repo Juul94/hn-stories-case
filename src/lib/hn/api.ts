@@ -2,7 +2,7 @@ import "server-only";
 import type { HNItem, HNUser, Story } from "@/lib/hn/types";
 import { shuffle } from "@/utils/shuffle";
 import { sortByScoreAsc } from "@/utils/sort";
-import { isValidStory, toStory, type ValidItem } from "@/utils/story";
+import { isValidStory, toStory, type ValidItem } from "@/lib/hn/story";
 
 export const HN_API_BASE = process.env.HN_API_BASE ?? "https://hacker-news.firebaseio.com/v0";
 
