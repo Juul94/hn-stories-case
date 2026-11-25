@@ -64,6 +64,22 @@
   }
 }
 
+.refreshButton {
+  @extend .button;
+  display: inline-grid;
+  place-items: center;
+}
+
+// Stacked in one cell; the hidden label keeps its space but is invisible and not announced.
+.label {
+  grid-area: 1 / 1;
+
+  &[hidden] {
+    display: block;
+    visibility: hidden;
+  }
+}
+
 .actions {
   display: flex;
   gap: $space-2;

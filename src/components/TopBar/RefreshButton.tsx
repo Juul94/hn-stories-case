@@ -14,12 +14,18 @@ export function RefreshButton() {
   return (
     <button
       type="button"
-      className={styles.button}
+      className={styles.refreshButton}
       onClick={refresh}
       disabled={isPending}
       aria-busy={isPending}
     >
-      {isPending ? "Henter…" : "Vis 10 nye historier"}
+      {/* Both labels share one grid cell, so the button keeps the width of the longest one. */}
+      <span className={styles.label} hidden={isPending}>
+        Vis 10 nye historier
+      </span>
+      <span className={styles.label} hidden={!isPending}>
+        Henter…
+      </span>
     </button>
   );
 }
