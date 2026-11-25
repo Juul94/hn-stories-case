@@ -16,7 +16,8 @@ Tests: Vitest + React Testing Library + MSW (unit/integration), Playwright (e2e 
 src/
 ├── app/          # Routes: page.tsx (server), loading.tsx, error.tsx
 ├── components/   # UI-komponenter + *.module.scss
-├── lib/hn/       # Alt HN-specifikt: api.ts, types.ts, story.ts
+├── lib/hn/       # Alt HN-specifikt: api.ts, types.ts, story.ts, sorting.ts
+├── lib/theme/    # Tema: opløsning, storage-nøgle og inline-script før paint
 ├── utils/        # Generiske rene funktioner (shuffle, sort, time, url) — ingen HN-viden, ingen I/O
 └── styles/       # _variables.scss, _mixins.scss, globals.scss
 public/           # Statiske filer (placeholder.svg)
@@ -70,7 +71,7 @@ export function isValidStory(item: HNItem | null | undefined): item is ValidItem
 - Rolig, ren stil: ingen lilla gradienter, glow eller emojis. Én accentfarve.
 - Mobile-first, virker fra 320px. Respektér `prefers-color-scheme` og `prefers-reduced-motion`.
 - Tilgængelighed: semantisk `main`/`article`/`time`, alt-tekst, synligt fokus, WCAG AA, `rel="noopener noreferrer"` på eksterne links.
-- Data hentes på serveren med caching/revalidate. Parallelle kald med `Promise.all`.
+- Data hentes på serveren med caching/revalidate. Parallelle kald med `Promise.allSettled`.
 - Ingen `any`. Rene funktioner i `utils/` får unit-tests.
 - Tilføj, fjern eller opgrader ikke afhængigheder uden aftale.
 - Git: kun som Juul94 (noreply-email). Ingen persondata i repoet.
