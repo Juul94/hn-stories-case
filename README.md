@@ -2,7 +2,7 @@
 
 **Live:** https://imerco-hn-case.vercel.app/
 
-Viser 10 tilfældige topnyheder fra Hacker News, sorteret stigende efter score. Hver række har titel, URL, tidspunkt, score, forfatter, forfatterens karma og et dummy-billede. Knappen "Vis 10 nye historier" henter et nyt udvalg.
+Viser 10 tilfældige topnyheder fra Hacker News, sorteret efter score (score stigende som standard, kan ændres i sorteringsvælgeren). Hver række har titel, URL, tidspunkt, score, forfatter, forfatterens karma og et dummy-billede. Knappen "Vis 10 nye historier" henter et nyt udvalg.
 
 Arkitektur og dataflow: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
@@ -24,7 +24,8 @@ Første gang e2e køres: `npx playwright install chromium`.
 
 ## Vigtige valg
 
-- **Server Components hele vejen.** Data hentes på serveren; kun tema-knap, "Vis 10 nye" og fejlsiden er client components. Ingen API-nøgler eller fetch-logik i browseren.
+- **Next.js + TypeScript + SCSS.** Server Components holder HN-kaldene på serveren med indbygget caching, TypeScript strict typer API-data, og SCSS opfylder kravet om en preprocessor uden et CSS-framework.
+- **Server Components hele vejen.** Data hentes på serveren; kun tema-knap, "Vis 10 nye", sorteringsvælgeren og fejlsiden er client components. Ingen API-nøgler eller fetch-logik i browseren.
 - **Tilfældigt udvalg pr. request.** `connection()` gør siden dynamisk, mens de enkelte HN-kald caches (top-liste 60 s, items 5 min, brugere 1 t).
 - **Sortering med seed.** `?seed=` styrer, hvilke 10 historier der trækkes, så `?sort=` kan sortere på serveren uden at trække nye. Uden `?sort` er rækkefølgen score stigende som krævet.
 - **Parallelle kald.** Items og brugere hentes med `Promise.allSettled`, så ét fejlende kald ikke vælter siden.
@@ -50,7 +51,7 @@ Projektet er bygget med Claude Code som par-programmør; jeg har styret retning,
 - **Små PR'er med tidsmål.** Jeg delte opgaven i PR'er (setup → data → UI → states → e2e/CI → docs) med måltider.
 - **Design.** Jeg afviste flere generiske, "AI-agtige" designforslag og satte selv den redaktionelle retning.
 - **Krav.** Jeg opdagede, at den fulde URL på hver historie (et hårdt krav) manglede, og fik den tilføjet.
-- **Scope-styring.** Undervejs prioriterede jeg krav og kvalitet over nye features og visuel polish, fx blev sortering valgt fra.
+- **Scope-styring.** Undervejs prioriterede jeg krav og kvalitet over nye features og visuel polish. Sortering tilføjede jeg sent, først da alle krav, tests, CI og docs var på plads.
 
 ## Kvalitetssikring af AI-genereret kode
 
