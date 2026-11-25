@@ -1,9 +1,16 @@
-import { hnItemUrl, isValidStory, toStory, type ValidItem } from "@/lib/hn/story";
+import { hnItemUrl, hnUserUrl, isValidStory, toStory, type ValidItem } from "@/lib/hn/story";
 import { makeItem, makeUser } from "../../../mocks/fixtures";
 
 describe("hnItemUrl", () => {
   it("links to the HN thread", () => {
     expect(hnItemUrl(123)).toBe("https://news.ycombinator.com/item?id=123");
+  });
+});
+
+describe("hnUserUrl", () => {
+  it("links to the user's profile and encodes the id", () => {
+    expect(hnUserUrl("pg")).toBe("https://news.ycombinator.com/user?id=pg");
+    expect(hnUserUrl("a&b")).toBe("https://news.ycombinator.com/user?id=a%26b");
   });
 });
 

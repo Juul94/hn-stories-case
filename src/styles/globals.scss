@@ -4,19 +4,21 @@
 :root {
   color-scheme: light dark;
   --color-bg: #{$light-bg};
-  --color-surface: #{$light-surface};
   --color-text: #{$light-text};
-  --color-muted: #{$light-muted};
-  --color-border: #{$light-border};
-  --color-accent: #{$light-accent};
+  --color-meta: #{$light-meta};
+  --color-visited: #{$light-visited};
+  --color-line: #{$light-line};
+  --color-focus: #{$light-focus};
+  --color-hover: #{$light-hover};
 
   @media (prefers-color-scheme: dark) {
     --color-bg: #{$dark-bg};
-    --color-surface: #{$dark-surface};
     --color-text: #{$dark-text};
-    --color-muted: #{$dark-muted};
-    --color-border: #{$dark-border};
-    --color-accent: #{$dark-accent};
+    --color-meta: #{$dark-meta};
+    --color-visited: #{$dark-visited};
+    --color-line: #{$dark-line};
+    --color-focus: #{$dark-focus};
+    --color-hover: #{$dark-hover};
   }
 }
 
@@ -29,10 +31,10 @@
 body {
   margin: 0;
   font-family: $font-sans;
-  line-height: 1.5;
+  font-size: $font-size-title;
+  line-height: 1.4;
   color: $color-text;
   background: $color-bg;
-  -webkit-font-smoothing: antialiased;
 }
 
 a {

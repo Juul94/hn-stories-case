@@ -1,9 +1,28 @@
 @use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.header {
+  display: none;
+
+  @include desktop-up {
+    @include story-columns;
+    padding: $space-2 $space-3;
+    font-size: $font-size-meta;
+    color: $color-meta;
+    border-bottom: 1px solid $color-line;
+  }
+}
+
+.headerScore {
+  text-align: right;
+}
 
 .list {
-  display: grid;
-  gap: $space-3;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.item {
+  border-bottom: 1px solid $color-line;
 }

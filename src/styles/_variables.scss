@@ -1,41 +1,54 @@
 // Raw palette. The only place hex values are allowed.
-// Contrast (WCAG AA): text and muted pass 4.5:1 on bg and surface in both schemes, accent too.
-$light-bg: #fafaf9;
-$light-surface: #ffffff;
-$light-text: #1c1917;
-$light-muted: #57534e;
-$light-border: #e7e5e4;
-$light-accent: #c2410c;
+// Contrast (WCAG AA) on the page background:
+// - text ≥ 15:1, meta 5:1 (HN's #828282 is only 3.5:1, so it is darkened), visited 5.5:1.
+// - #ff6600 is only 2.7:1 on the light background, so focus rings and the hover border
+//   use a darker orange there (4.3:1, above the 3:1 needed for non-text).
+// - Black text on the orange bar is 7.2:1.
+$hn-orange: #ff6600;
 
-$dark-bg: #111111;
-$dark-surface: #1c1c1c;
-$dark-text: #f5f5f4;
-$dark-muted: #a8a29e;
-$dark-border: #2e2e2e;
-$dark-accent: #fb923c;
+$light-bg: #f6f6ef;
+$light-text: #222222;
+$light-meta: #6a6a6a;
+$light-visited: #5f5f5f;
+$light-line: #e0e0d6;
+$light-focus: #c94f00;
+$light-hover: rgba(255, 102, 0, 0.07);
+
+$dark-bg: #1a1a17;
+$dark-text: #e8e6df;
+$dark-meta: #9d9b93;
+$dark-visited: #a8a69e;
+$dark-line: #33332e;
+$dark-focus: #ff6600;
+$dark-hover: rgba(255, 102, 0, 0.1);
+
+$bar-text: #000000;
+$bar-button-hover: rgba(0, 0, 0, 0.12);
 
 // Semantic colors. CSS custom properties, so the color scheme switches at runtime (see globals.scss).
 $color-bg: var(--color-bg);
-$color-surface: var(--color-surface);
 $color-text: var(--color-text);
-$color-muted: var(--color-muted);
-$color-border: var(--color-border);
-$color-accent: var(--color-accent);
+$color-meta: var(--color-meta);
+$color-visited: var(--color-visited);
+$color-line: var(--color-line);
+$color-focus: var(--color-focus);
+$color-hover: var(--color-hover);
+$color-accent: $hn-orange;
 
-$font-sans:
-  system-ui,
-  -apple-system,
-  "Segoe UI",
-  Roboto,
-  sans-serif;
+$font-sans: Verdana, Geneva, "DejaVu Sans", system-ui, sans-serif;
+$font-size-title: 0.9375rem; // 15px
+$font-size-meta: 0.8125rem; // 13px
 
 $space-1: 0.25rem;
 $space-2: 0.5rem;
 $space-3: 0.75rem;
 $space-4: 1rem;
 $space-6: 1.5rem;
-$space-8: 2rem;
 
-$radius: 8px;
-$content-width: 44rem;
-$breakpoint-sm: 36rem;
+$content-width: 1100px;
+$gutter: $space-4;
+$row-border: 3px;
+
+// Breakpoints, mobile first. Use through the mixins in _mixins.scss.
+$breakpoint-tablet: 640px;
+$breakpoint-desktop: 1024px;

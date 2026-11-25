@@ -1,0 +1,179 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// Mobile: title + domain, then one gray meta line that wraps as running text.
+.row {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    "story"
+    "meta";
+  row-gap: $space-1;
+  padding: $space-3 $space-3 $space-3 calc(#{$space-3} - #{$row-border});
+  border-left: $row-border solid transparent;
+  cursor: pointer;
+
+  &:hover,
+  &:has(.titleLink:focus-visible) {
+    border-left-color: $color-focus;
+    background: $color-hover;
+  }
+
+  // 640–1023px: score | story | author over time.
+  @include tablet-up {
+    grid-template-columns: 4.5rem minmax(0, 1fr) minmax(10rem, 14rem);
+    grid-template-areas:
+      "score story author"
+      "score story time";
+    column-gap: $space-4;
+    align-items: start;
+  }
+
+  // 1024px and up: score | story | author | time, aligned with the header row.
+  @include desktop-up {
+    @include story-columns;
+    row-gap: 0;
+  }
+}
+
+.story {
+  grid-area: story;
+
+  @include tablet-up {
+    display: flex;
+    gap: $space-3;
+    align-items: flex-start;
+  }
+}
+
+// Decorative only; hidden on small screens to give the title the full width.
+.image {
+  display: none;
+
+  @include tablet-up {
+    display: block;
+    flex: none;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.title {
+  display: inline;
+  margin: 0;
+  font-size: $font-size-title;
+  font-weight: normal;
+  line-height: 1.35;
+}
+
+.titleLink {
+  color: $color-text;
+  text-decoration: none;
+
+  &:visited {
+    color: $color-visited;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  // Stretched link: covers the whole row, so a click anywhere opens the story.
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  // The row shows the focus state, so the ring is drawn around the whole row.
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:focus-visible::after {
+    @include focus-ring;
+    outline-offset: -2px;
+  }
+}
+
+.domain,
+.meta {
+  font-size: $font-size-meta;
+  color: $color-meta;
+}
+
+.meta {
+  grid-area: meta;
+  margin: 0;
+  line-height: 1.45;
+
+  // From tablet up, the meta parts become grid items in their own columns.
+  @include tablet-up {
+    display: contents;
+  }
+}
+
+.score {
+  @include tablet-up {
+    grid-area: score;
+    text-align: right;
+  }
+}
+
+.scoreValue {
+  font-variant-numeric: tabular-nums;
+
+  @include tablet-up {
+    font-size: $font-size-title;
+    color: $color-text;
+  }
+}
+
+.scoreUnit {
+  @include desktop-up {
+    @include visually-hidden;
+  }
+}
+
+.author {
+  @include tablet-up {
+    grid-area: author;
+  }
+}
+
+.authorPrefix {
+  @include desktop-up {
+    @include visually-hidden;
+  }
+}
+
+// Above the stretched title link, so it stays clickable on its own.
+.authorLink {
+  position: relative;
+  z-index: 1;
+  color: $color-text;
+
+  &:hover {
+    text-decoration-color: $color-focus;
+    text-decoration-thickness: 2px;
+  }
+}
+
+// Keeps a date or a relative time on one line, so the meta line only breaks between them.
+.nowrap {
+  white-space: nowrap;
+}
+
+.time {
+  &::before {
+    content: "· " / "";
+  }
+
+  @include tablet-up {
+    grid-area: time;
+
+    &::before {
+      content: none;
+    }
+  }
+}

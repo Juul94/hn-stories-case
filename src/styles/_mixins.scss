@@ -1,7 +1,7 @@
 @use "variables" as *;
 
 @mixin focus-ring {
-  outline: 2px solid $color-accent;
+  outline: 2px solid $color-focus;
   outline-offset: 2px;
 }
 
@@ -18,11 +18,33 @@
   border: 0;
 }
 
-/** Mobile-first: styles for viewports at least `$breakpoint` wide. */
-@mixin from($breakpoint) {
-  @media (min-width: $breakpoint) {
+/** 640px and up: score in its own column, author and time share one. */
+@mixin tablet-up {
+  @media (min-width: $breakpoint-tablet) {
     @content;
   }
+}
+
+/** 1024px and up: one column each for score, story, author and time. */
+@mixin desktop-up {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+/** Centered content column, full width with a gutter on small screens. */
+@mixin container {
+  max-width: $content-width;
+  margin-inline: auto;
+  padding-inline: $gutter;
+}
+
+/** Story table columns, shared by the header row and the story rows so they line up. */
+@mixin story-columns {
+  display: grid;
+  column-gap: $space-4;
+  grid-template-columns: 3rem minmax(0, 1fr) minmax(9rem, 13rem) minmax(12rem, 19rem);
+  grid-template-areas: "score story author time";
 }
 
 /** Animations only for users who have not asked for reduced motion. */
