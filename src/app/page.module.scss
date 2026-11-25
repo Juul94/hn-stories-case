@@ -1,0 +1,27 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+.main {
+  max-width: $content-width;
+  margin: 0 auto;
+  padding: $space-6 $space-4 $space-8;
+
+  @include from($breakpoint-sm) {
+    padding-top: $space-8;
+  }
+}
+
+.header {
+  margin-bottom: $space-6;
+}
+
+.heading {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.intro {
+  margin: $space-1 0 0;
+  color: $color-muted;
+}
