@@ -53,7 +53,9 @@ Projektet er bygget med Claude Code som par-programmør; jeg har styret retning,
 
 - **Rammer først.** `CLAUDE.md` fastlægger stack, mappestruktur, code style (explaining variables, guard clauses), regler for farver, tilgængelighed, mobile-first, ingen nye afhængigheder uden aftale, og at lint/typecheck/format/test skal være grønne før hver commit.
 - **Små PR'er med tidsmål.** Jeg delte opgaven i PR'er (setup → data → UI → states → e2e/CI → docs) med måltider, og jeg merger hver PR selv efter review.
-- **Review og beslutninger.** Jeg læste hver diff og så UI'et på mobil og desktop. Jeg fik desuden en uafhængig review af en PR og valgte selv, hvilke punkter der gav mening (fx `h3`-titler og `aria-disabled` på opdater-knappen; pre-hydration-label på tema-knappen blev udskudt).
+- **Review og beslutninger.** Jeg læste hver diff og så UI'et på mobil og desktop. Jeg brugte en separat Claude-chat som AI-reviewer og sparringspartner til PR-reviews, prompts og designfeedback, og besluttede selv, hvilke punkter der skulle handles på (fx `h3`-titler og `aria-disabled` på opdater-knappen; pre-hydration-label på tema-knappen blev udskudt).
+- **Design.** Jeg afviste flere generiske, "AI-agtige" designforslag og satte selv den redaktionelle retning.
+- **Krav.** Jeg opdagede, at den fulde URL på hver historie (et hårdt krav) manglede, og fik den tilføjet.
 - **Scope-styring.** Undervejs prioriterede jeg krav og kvalitet over nye features og visuel polish, fx blev sortering valgt fra.
 
 ## Hvad jeg ville gøre med mere tid
@@ -65,4 +67,4 @@ Projektet er bygget med Claude Code som par-programmør; jeg har styret retning,
 
 ## Tidsforbrug
 
-Start 2026-11-25 16:24:25. Brugt: ca. 1 t 45 m (opdateres ved aflevering).
+Start 2026-11-25 16:24:25. Brugt: ca. 1 t 45 m (opdateres ved aflevering). Dertil ca. 30 min planlægning og prompt-skrivning før start.
