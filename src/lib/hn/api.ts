@@ -63,12 +63,17 @@ export async function getRandomStories(
 
   const items: ValidItem[] = [];
   let offset = 0;
-  while (items.length < count && offset < ids.length) {
-    const batch = ids.slice(offset, offset + count - items.length + BUFFER);
+  for (;;) {
+    const missing = count - items.length;
+    const hasEnough = missing <= 0;
+    const isOutOfIds = offset >= ids.length;
+    if (hasEnough || isOutOfIds) break;
+
+    const batch = ids.slice(offset, offset + missing + BUFFER);
     offset += batch.length;
     const results = await Promise.allSettled(batch.map((id) => fetchItem(id)));
     const valid = results.map(valueOrNull).filter(isValidStory);
-    items.push(...valid.slice(0, count - items.length));
+    items.push(...valid.slice(0, missing));
   }
 
   const authorIds = [...new Set(items.map((item) => item.by))];

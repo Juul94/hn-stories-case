@@ -10,7 +10,9 @@ export function getDomain(url: string | undefined): string | null {
   if (!url) return null;
   try {
     const { hostname, protocol } = new URL(url);
-    if (protocol !== "http:" && protocol !== "https:") return null;
+    const isWebUrl = protocol === "http:" || protocol === "https:";
+    if (!isWebUrl) return null;
+
     return hostname.replace(/^www\./, "");
   } catch {
     return null;
