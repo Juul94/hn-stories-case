@@ -41,22 +41,24 @@ Første gang e2e køres: `npx playwright install chromium`.
 - Skeleton-rækker under indlæsning, uden animation ved reduced motion.
 - Layout virker fra 320px uden vandret scroll (testet i e2e).
 
-## Kvalitet og CI
-
-GitHub Actions kører ved hver push og PR: install → lint → typecheck → format:check → test → build → e2e (Playwright-browsere caches). Node-version læses fra `.nvmrc`.
-
-`main` er beskyttet: status-checket `ci` skal være grønt, og branchen skal være opdateret med `main`, før en PR kan merges. Reglen gælder også admins, så rød CI blokerer merge.
-
 ## Brug af AI
 
 Projektet er bygget med Claude Code som par-programmør; jeg har styret retning, scope og kvalitet.
 
-- **Rammer først.** `CLAUDE.md` fastlægger stack, mappestruktur, code style (explaining variables, guard clauses), regler for farver, tilgængelighed, mobile-first, ingen nye afhængigheder uden aftale, og at lint/typecheck/format/test skal være grønne før hver commit.
-- **Små PR'er med tidsmål.** Jeg delte opgaven i PR'er (setup → data → UI → states → e2e/CI → docs) med måltider, og jeg merger hver PR selv efter review.
-- **Review og beslutninger.** Jeg læste hver diff og så UI'et på mobil og desktop. Jeg brugte en separat Claude-chat som AI-reviewer og sparringspartner til PR-reviews, prompts og designfeedback, og besluttede selv, hvilke punkter der skulle handles på (fx `h3`-titler og `aria-disabled` på opdater-knappen; pre-hydration-label på tema-knappen blev udskudt).
+- **Små PR'er med tidsmål.** Jeg delte opgaven i PR'er (setup → data → UI → states → e2e/CI → docs) med måltider.
 - **Design.** Jeg afviste flere generiske, "AI-agtige" designforslag og satte selv den redaktionelle retning.
 - **Krav.** Jeg opdagede, at den fulde URL på hver historie (et hårdt krav) manglede, og fik den tilføjet.
 - **Scope-styring.** Undervejs prioriterede jeg krav og kvalitet over nye features og visuel polish, fx blev sortering valgt fra.
+
+## Kvalitetssikring af AI-genereret kode
+
+1. **Regler for agenten.** [`CLAUDE.md`](CLAUDE.md) styrer agenten:
+   - Code style: explaining variables, guard clauses og domænestruktur (`lib/hn/` vs. generiske `utils/`).
+   - Ingen UI-biblioteker og ingen nye afhængigheder uden min godkendelse.
+   - Tilgængelighed (WCAG AA) og mobile-first fra 320px.
+   - Lint, typecheck, format:check og tests skal være grønne lokalt før hver commit.
+2. **Automatiske gates.** GitHub Actions kører lint → typecheck → format:check → unit/integration → build → e2e ved hver push og PR. Branch protection blokerer merge til `main`, medmindre `ci` er grønt og branchen er opdateret. Det gælder også admins.
+3. **Menneskelig gate.** Agenten merger aldrig. Jeg reviewer hver diff og ser UI'et på mobil og desktop. En separat Claude-chat er reviewer nummer to, men jeg beslutter selv, hvad der rettes, fx `h3`-titler og `aria-disabled` på opdater-knappen.
 
 ## Hvad jeg ville gøre med mere tid
 
