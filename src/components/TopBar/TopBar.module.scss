@@ -54,12 +54,12 @@
     transition: $transition-theme;
   }
 
-  &:hover:not(:disabled) {
+  &:hover:not([aria-disabled="true"]) {
     background: $color-box-hover;
     border-color: $color-line-strong;
   }
 
-  &:disabled {
+  &[aria-disabled="true"] {
     cursor: progress;
   }
 }

@@ -9,14 +9,18 @@ export function RefreshButton() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
-  const refresh = () => startTransition(() => router.refresh());
+  // aria-disabled instead of disabled, so the button keeps keyboard focus while loading.
+  const refresh = () => {
+    if (isPending) return;
+    startTransition(() => router.refresh());
+  };
 
   return (
     <button
       type="button"
       className={styles.refreshButton}
       onClick={refresh}
-      disabled={isPending}
+      aria-disabled={isPending}
       aria-busy={isPending}
     >
       {/* Both labels share one grid cell, so the button keeps the width of the longest one. */}
