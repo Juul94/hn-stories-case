@@ -1,3 +1,4 @@
+import "server-only";
 import type { HNItem, HNUser, Story } from "@/lib/hn/types";
 import { shuffle } from "@/utils/shuffle";
 import { sortByScoreAsc } from "@/utils/sort";
