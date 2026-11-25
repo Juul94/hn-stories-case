@@ -1,7 +1,7 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-// Mobile: title + domain, then one gray meta line that wraps as running text.
+// Mobile: image + title + URL, then one gray meta line that wraps as running text.
 .row {
   position: relative;
   display: grid;
@@ -44,25 +44,18 @@
 }
 
 .story {
+  display: flex;
+  gap: $space-3;
+  align-items: flex-start;
   grid-area: story;
-
-  @include tablet-up {
-    display: flex;
-    gap: $space-3;
-    align-items: flex-start;
-  }
 }
 
-// Decorative only; hidden on small screens to give the title the full width.
+// Static placeholder image; decorative, so it has empty alt text.
 .image {
-  display: none;
-
-  @include tablet-up {
-    display: block;
-    flex: none;
-    width: 40px;
-    height: 40px;
-  }
+  display: block;
+  flex: none;
+  width: 40px;
+  height: 40px;
 }
 
 // Lets the URL shrink and get an ellipsis inside the flex row.
