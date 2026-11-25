@@ -1,0 +1,29 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.box {
+  display: grid;
+  gap: $space-2;
+  justify-items: center;
+  padding: $space-6 $space-4;
+  text-align: center;
+  background: $color-box;
+  border: 1px solid $color-line;
+  border-radius: $radius-box;
+}
+
+.title {
+  margin: 0;
+  font-size: $font-size-title;
+  font-weight: 600;
+}
+
+.text {
+  margin: 0;
+  color: $color-meta;
+}
+
+.action {
+  @include button;
+  margin-top: $space-2;
+}

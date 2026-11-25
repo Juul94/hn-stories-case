@@ -47,6 +47,32 @@
   grid-template-areas: "score story author time";
 }
 
+/** Neutral outlined button, 44px touch target. */
+@mixin button {
+  min-height: 2.75rem;
+  padding: 0 $space-3;
+  font: inherit;
+  font-size: $font-size-meta;
+  color: $color-text;
+  background: transparent;
+  border: 1px solid $color-line;
+  border-radius: $radius-button;
+  cursor: pointer;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: $transition-theme;
+  }
+
+  &:hover:not([aria-disabled="true"]) {
+    background: $color-box-hover;
+    border-color: $color-line-strong;
+  }
+
+  &[aria-disabled="true"] {
+    cursor: progress;
+  }
+}
+
 /** Animations only for users who have not asked for reduced motion. */
 @mixin motion-safe {
   @media (prefers-reduced-motion: no-preference) {

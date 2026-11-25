@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { TopBar } from "@/components/TopBar/TopBar";
 import { themeInitScript } from "@/lib/theme/theme";
 import "@/styles/globals.scss";
 
@@ -19,7 +20,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {/* In the layout, so the header also shows while loading and on errors. */}
+        <TopBar />
+        {children}
+      </body>
     </html>
   );
 }

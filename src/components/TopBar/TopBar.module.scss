@@ -40,28 +40,7 @@
 }
 
 .button {
-  min-height: 2.75rem; // 44px touch target
-  padding: 0 $space-3;
-  font: inherit;
-  font-size: $font-size-meta;
-  color: $color-text;
-  background: transparent;
-  border: 1px solid $color-line;
-  border-radius: $radius-button;
-  cursor: pointer;
-
-  @include motion-safe {
-    transition: $transition-theme;
-  }
-
-  &:hover:not([aria-disabled="true"]) {
-    background: $color-box-hover;
-    border-color: $color-line-strong;
-  }
-
-  &[aria-disabled="true"] {
-    cursor: progress;
-  }
+  @include button;
 }
 
 .refreshButton {

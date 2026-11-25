@@ -1,0 +1,69 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// Same list gap, box, padding and image size as the real rows, so the page does not jump.
+.list {
+  display: grid;
+  gap: $space-2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  gap: $space-3;
+  align-items: flex-start;
+  padding: $space-3;
+  background: $color-box;
+  border: 1px solid $color-line;
+  border-radius: $radius-box;
+}
+
+.image,
+.bar {
+  display: block;
+  background: $color-line;
+  border-radius: $radius-button;
+
+  // A slow pulse; with reduced motion the blocks stand still.
+  @include motion-safe {
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+}
+
+.image {
+  flex: none;
+  width: 40px;
+  height: 40px;
+}
+
+.lines {
+  display: grid;
+  flex: 1;
+  gap: $space-2;
+  padding-block: 0.125rem;
+}
+
+.bar {
+  height: 0.75rem;
+}
+
+.title {
+  width: 80%;
+  height: 1rem;
+}
+
+.url {
+  width: 55%;
+}
+
+.meta {
+  width: 65%;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
