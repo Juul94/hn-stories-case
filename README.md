@@ -71,4 +71,8 @@ Projektet er bygget med Claude Code som par-programmør; jeg har styret retning,
 
 ## Tidsforbrug
 
-Start 2026-11-25 16:24:25. Brugt: ca. 1 t 45 m (opdateres ved aflevering). Dertil ca. 30 min planlægning og prompt-skrivning før start.
+- Start: 2026-11-25 16:24:25
+- Slut: 2026-11-25 19:03:01
+- Total: ca. 2 t 39 m
+- Plus: ca. 15 min planlægning og prompt-skrivning før start.
+- I alt inkl. planlægning: ca. 2 t 54 m
