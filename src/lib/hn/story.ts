@@ -2,10 +2,16 @@ import type { HNItem, HNUser, Story } from "@/lib/hn/types";
 import { getDomain } from "@/utils/url";
 
 const HN_ITEM_URL = "https://news.ycombinator.com/item?id=";
+const HN_USER_URL = "https://news.ycombinator.com/user?id=";
 
 /** Link to the story's thread on Hacker News. */
 export function hnItemUrl(id: number): string {
   return `${HN_ITEM_URL}${id}`;
+}
+
+/** Link to a user's profile on Hacker News. */
+export function hnUserUrl(id: string): string {
+  return `${HN_USER_URL}${encodeURIComponent(id)}`;
 }
 
 export type ValidItem = HNItem & {

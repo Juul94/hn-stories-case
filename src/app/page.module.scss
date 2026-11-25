@@ -1,0 +1,8 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+// Full width with a gutter on small screens; the rows reach the edges inside it.
+.main {
+  @include container;
+  padding-block: $space-6;
+}

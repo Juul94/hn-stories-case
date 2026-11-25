@@ -1,0 +1,30 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// Same inner offset as a story box (padding + 1px border), so the labels line up with the columns.
+.header {
+  display: none;
+
+  @include desktop-up {
+    @include story-columns;
+    padding: $space-1 calc(#{$space-3} + 1px);
+    font-size: $font-size-meta;
+    color: $color-meta;
+  }
+}
+
+.headerScore {
+  text-align: right;
+}
+
+.sortArrow {
+  color: $color-meta;
+}
+
+.list {
+  display: grid;
+  gap: $space-2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

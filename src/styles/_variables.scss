@@ -1,0 +1,61 @@
+// Raw palette. The only place hex values are allowed.
+// Neutral grays; contrast (WCAG AA) on the rows: text ≥ 15:1, meta 6.7:1 light / 7.1:1 dark.
+// The hover border (text at 40%) stays ≥ 3:1 for non-text.
+$hn-orange: #ff6600; // Brand accent: only the top line and the "HN" logo mark.
+$logo-text: #ffffff;
+
+$light-bg: #ffffff;
+$light-box: #ffffff;
+$light-box-hover: #fafafa;
+$light-line: #e5e5e5;
+$light-text: #111111;
+$light-meta: #5c5c5c;
+
+$dark-bg: #121212;
+$dark-box: #1a1a1a;
+$dark-box-hover: #202020;
+$dark-line: #2a2a2a;
+$dark-text: #ededed;
+$dark-meta: #a3a3a3;
+
+// Semantic colors. CSS custom properties, so the color scheme switches at runtime (see globals.scss).
+$color-bg: var(--color-bg);
+$color-box: var(--color-box);
+$color-box-hover: var(--color-box-hover);
+$color-line: var(--color-line);
+$color-line-strong: var(--color-line-strong); // Row hover/focus border.
+$color-text: var(--color-text);
+$color-meta: var(--color-meta);
+$color-focus: $color-text;
+$color-accent: $hn-orange;
+
+$font-sans:
+  system-ui,
+  -apple-system,
+  "Segoe UI",
+  Roboto,
+  sans-serif;
+$font-size-base: 0.9375rem; // 15px
+$font-size-title: 1rem; // 16px
+$font-size-meta: 0.8125rem; // 13px
+
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-6: 1.5rem;
+
+$content-width: 1100px;
+$gutter: $space-4;
+$radius-box: 6px;
+$radius-button: 3px;
+
+// Smooth theme switch. Only applied inside the motion-safe mixin.
+$transition-theme:
+  background-color 150ms ease,
+  border-color 150ms ease,
+  color 150ms ease;
+
+// Breakpoints, mobile first. Use through the mixins in _mixins.scss.
+$breakpoint-tablet: 640px;
+$breakpoint-desktop: 1024px;

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { themeInitScript } from "@/lib/theme/theme";
 import "@/styles/globals.scss";
 
 export const metadata: Metadata = {
@@ -13,7 +14,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="da">
+    // The inline script sets data-theme before React hydrates, so the attribute may differ.
+    <html lang="da" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>{children}</body>
     </html>
   );

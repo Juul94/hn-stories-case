@@ -1,3 +1,43 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+@mixin light-theme {
+  color-scheme: light;
+  --color-bg: #{$light-bg};
+  --color-box: #{$light-box};
+  --color-box-hover: #{$light-box-hover};
+  --color-line: #{$light-line};
+  --color-line-strong: #{rgba($light-text, 0.4)};
+  --color-text: #{$light-text};
+  --color-meta: #{$light-meta};
+}
+
+@mixin dark-theme {
+  color-scheme: dark;
+  --color-bg: #{$dark-bg};
+  --color-box: #{$dark-box};
+  --color-box-hover: #{$dark-box-hover};
+  --color-line: #{$dark-line};
+  --color-line-strong: #{rgba($dark-text, 0.4)};
+  --color-text: #{$dark-text};
+  --color-meta: #{$dark-meta};
+}
+
+// data-theme on <html> (set by the theme toggle) wins; without it, the system preference decides.
+:root {
+  @include light-theme;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include dark-theme;
+  }
+}
+
+:root[data-theme="dark"] {
+  @include dark-theme;
+}
+
 *,
 *::before,
 *::after {
@@ -6,5 +46,36 @@
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: $font-sans;
+  font-size: $font-size-base;
+  line-height: 1.4;
+  color: $color-text;
+  background: $color-bg;
+
+  @include motion-safe {
+    transition: $transition-theme;
+  }
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
