@@ -5,7 +5,7 @@ export function TopBar() {
   return (
     <header className={styles.bar}>
       <div className={styles.inner}>
-        <h1 className={styles.title}>Hacker News · 10 tilfældige</h1>
+        <h1 className={styles.title}>Hacker News</h1>
         <RefreshButton />
       </div>
     </header>
