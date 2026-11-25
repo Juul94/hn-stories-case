@@ -35,28 +35,25 @@ export async function fetchTopStoryIds(): Promise<number[]> {
   return Array.isArray(ids) ? ids : [];
 }
 
-/** One item. A failed or empty response gives null, so the story is replaced instead of failing the page. */
-export async function fetchItem(id: number): Promise<HNItem | null> {
-  try {
-    return await fetchJson<HNItem | null>(`item/${id}.json`, REVALIDATE.item);
-  } catch {
-    return null;
-  }
+export function fetchItem(id: number): Promise<HNItem | null> {
+  return fetchJson<HNItem | null>(`item/${id}.json`, REVALIDATE.item);
 }
 
-/** One user. A failed or empty response gives null, and the card shows the karma as unknown. */
-export async function fetchUser(id: string): Promise<HNUser | null> {
-  try {
-    return await fetchJson<HNUser | null>(`user/${encodeURIComponent(id)}.json`, REVALIDATE.user);
-  } catch {
-    return null;
-  }
+export function fetchUser(id: string): Promise<HNUser | null> {
+  return fetchJson<HNUser | null>(`user/${encodeURIComponent(id)}.json`, REVALIDATE.user);
+}
+
+/** Value of a settled promise, or null if it was rejected. */
+function valueOrNull<T>(result: PromiseSettledResult<T | null>): T | null {
+  return result.status === "fulfilled" ? result.value : null;
 }
 
 /**
  * `count` random top stories with their authors, sorted by score (lowest first).
- * Dead, deleted, null and non-story items are skipped and replaced from the rest of the shuffled list.
- * Throws HNApiError when the top list cannot be fetched. Returns fewer stories only if the list runs out.
+ * Items and users are fetched in parallel with Promise.allSettled, so one failed request never breaks the page:
+ * - a failed, null, dead, deleted or non-story item is skipped and replaced from the shuffled list,
+ * - a failed user gives karma null.
+ * Throws HNApiError only when the top list cannot be fetched. Returns fewer stories only if the list runs out.
  */
 export async function getRandomStories(
   count: number = STORY_COUNT,
@@ -69,13 +66,15 @@ export async function getRandomStories(
   while (items.length < count && offset < ids.length) {
     const batch = ids.slice(offset, offset + count - items.length + BUFFER);
     offset += batch.length;
-    const fetched = await Promise.all(batch.map(fetchItem));
-    items.push(...fetched.filter(isValidStory).slice(0, count - items.length));
+    const results = await Promise.allSettled(batch.map((id) => fetchItem(id)));
+    const valid = results.map(valueOrNull).filter(isValidStory);
+    items.push(...valid.slice(0, count - items.length));
   }
 
   const authorIds = [...new Set(items.map((item) => item.by))];
-  const users = await Promise.all(authorIds.map(fetchUser));
-  const usersById = new Map(authorIds.map((id, i) => [id, users[i] ?? null]));
+  const results = await Promise.allSettled(authorIds.map((id) => fetchUser(id)));
+  const users = results.map(valueOrNull).filter((user) => user !== null);
+  const usersById = new Map(users.map((user) => [user.id, user]));
 
   return sortByScoreAsc(items.map((item) => toStory(item, usersById.get(item.by) ?? null)));
 }

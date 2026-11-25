@@ -66,24 +66,22 @@ describe("getRandomStories", () => {
     expect(stories.every((s) => s.id > 20)).toBe(true);
   });
 
-  it("treats a failing item request like a missing item", async () => {
-    const data = mockData();
+  it("survives one failing item and one failing user", async () => {
     server.use(
-      http.get(`${HN_API_BASE}/item/1.json`, () => new HttpResponse(null, { status: 500 })),
-      ...hnHandlers(data),
-    );
-    const stories = await getRandomStories(10, noShuffle);
-    expect(stories).toHaveLength(10);
-    expect(stories.map((s) => s.id)).not.toContain(1);
-  });
-
-  it("shows the story with unknown karma when the user request fails", async () => {
-    server.use(
-      http.get(`${HN_API_BASE}/user/user1.json`, () => new HttpResponse(null, { status: 500 })),
+      http.get(`${HN_API_BASE}/item/2.json`, () => new HttpResponse(null, { status: 500 })),
+      http.get(`${HN_API_BASE}/user/user1.json`, () => HttpResponse.error()),
       ...hnHandlers(mockData()),
     );
     const stories = await getRandomStories(10, noShuffle);
-    expect(stories.find((s) => s.id === 1)?.author.karma).toBeNull();
+    const ids = stories.map((s) => s.id);
+
+    // Failed item is skipped and filled from the buffer.
+    expect(ids).toHaveLength(10);
+    expect(ids).not.toContain(2);
+    expect(ids).toContain(11);
+    // Failed user still shows the story, with unknown karma.
+    expect(stories.find((s) => s.id === 1)?.author).toEqual({ id: "user1", karma: null });
+    expect(stories.find((s) => s.id === 3)?.author.karma).toBe(1000);
   });
 
   it("fetches each author only once", async () => {
