@@ -23,8 +23,14 @@
 
 .list {
   display: grid;
+  grid-auto-rows: 1fr; // Every row as tall as the tallest one.
   gap: $space-2;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+// Lets the story box fill the full row height.
+.item {
+  display: grid;
 }

@@ -20,6 +20,11 @@ describe("StoryRow", () => {
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
   });
 
+  it("keeps the full title available when it is visually clamped", () => {
+    render(<StoryRow story={story} />);
+    expect(screen.getByRole("link", { name: /A story/ })).toHaveAttribute("title", "A story");
+  });
+
   it("uses an h3 title under the list's h2 heading", () => {
     render(<StoryRow story={story} />);
     expect(screen.getByRole("heading", { level: 3, name: /A story/ })).toBeInTheDocument();
