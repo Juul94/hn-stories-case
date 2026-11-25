@@ -29,9 +29,9 @@
   font: inherit;
   font-size: $font-size-meta;
   color: $bar-text;
-  background: transparent;
-  border: 1px solid $bar-text;
-  border-radius: 2px;
+  background: $bar-button-bg;
+  border: 1px solid transparent;
+  border-radius: $radius-button;
   cursor: pointer;
 
   &:hover:not(:disabled) {

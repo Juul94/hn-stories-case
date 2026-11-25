@@ -4,21 +4,23 @@
 :root {
   color-scheme: light dark;
   --color-bg: #{$light-bg};
+  --color-box: #{$light-box};
+  --color-box-hover: #{$light-box-hover};
+  --color-line: #{$light-line};
   --color-text: #{$light-text};
   --color-meta: #{$light-meta};
   --color-visited: #{$light-visited};
-  --color-line: #{$light-line};
-  --color-focus: #{$light-focus};
-  --color-hover: #{$light-hover};
+  --color-orange: #{$light-orange};
 
   @media (prefers-color-scheme: dark) {
     --color-bg: #{$dark-bg};
+    --color-box: #{$dark-box};
+    --color-box-hover: #{$dark-box-hover};
+    --color-line: #{$dark-line};
     --color-text: #{$dark-text};
     --color-meta: #{$dark-meta};
     --color-visited: #{$dark-visited};
-    --color-line: #{$dark-line};
-    --color-focus: #{$dark-focus};
-    --color-hover: #{$dark-hover};
+    --color-orange: #{$dark-orange};
   }
 }
 

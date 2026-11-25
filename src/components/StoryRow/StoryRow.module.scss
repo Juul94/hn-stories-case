@@ -9,14 +9,16 @@
     "story"
     "meta";
   row-gap: $space-1;
-  padding: $space-3 $space-3 $space-3 calc(#{$space-3} - #{$row-border});
-  border-left: $row-border solid transparent;
+  padding: $space-3;
+  background: $color-box;
+  border: 1px solid $color-line;
+  border-radius: $radius-box;
   cursor: pointer;
 
   &:hover,
   &:has(.titleLink:focus-visible) {
-    border-left-color: $color-focus;
-    background: $color-hover;
+    background: $color-box-hover;
+    border-color: $color-orange;
   }
 
   // 640–1023px: score | story | author over time.
@@ -92,7 +94,8 @@
 
   &:focus-visible::after {
     @include focus-ring;
-    outline-offset: -2px;
+    outline-offset: 1px;
+    border-radius: $radius-box;
   }
 }
 
@@ -121,11 +124,12 @@
 }
 
 .scoreValue {
+  font-weight: bold;
   font-variant-numeric: tabular-nums;
+  color: $color-orange;
 
   @include tablet-up {
     font-size: $font-size-title;
-    color: $color-text;
   }
 }
 

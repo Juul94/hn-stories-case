@@ -1,15 +1,15 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
+// Same inner offset as a story box (padding + 1px border), so the labels line up with the columns.
 .header {
   display: none;
 
   @include desktop-up {
     @include story-columns;
-    padding: $space-2 $space-3;
+    padding: $space-1 calc(#{$space-3} + 1px);
     font-size: $font-size-meta;
     color: $color-meta;
-    border-bottom: 1px solid $color-line;
   }
 }
 
@@ -18,11 +18,9 @@
 }
 
 .list {
+  display: grid;
+  gap: $space-2;
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.item {
-  border-bottom: 1px solid $color-line;
 }
