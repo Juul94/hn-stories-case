@@ -1,4 +1,37 @@
-import { sortByScoreAsc } from "@/utils/sort";
+import { byKarmaDesc, byNewest, byScoreAsc, byScoreDesc, sortByScoreAsc } from "@/utils/sort";
+
+describe("comparators", () => {
+  it("byScoreAsc sorts lowest score first", () => {
+    expect([{ score: 3 }, { score: 1 }, { score: 2 }].sort(byScoreAsc)).toEqual([
+      { score: 1 },
+      { score: 2 },
+      { score: 3 },
+    ]);
+  });
+
+  it("byScoreDesc sorts highest score first", () => {
+    expect([{ score: 3 }, { score: 1 }, { score: 2 }].sort(byScoreDesc)).toEqual([
+      { score: 3 },
+      { score: 2 },
+      { score: 1 },
+    ]);
+  });
+
+  it("byNewest sorts the latest time first", () => {
+    expect([{ time: 100 }, { time: 300 }, { time: 200 }].sort(byNewest)).toEqual([
+      { time: 300 },
+      { time: 200 },
+      { time: 100 },
+    ]);
+  });
+
+  it("byKarmaDesc sorts highest karma first and unknown karma last", () => {
+    const result = [{ karma: null }, { karma: 5 }, { karma: 50 }, { karma: null }].sort(
+      byKarmaDesc,
+    );
+    expect(result.map((a) => a.karma)).toEqual([50, 5, null, null]);
+  });
+});
 
 describe("sortByScoreAsc", () => {
   it("sorts lowest score first", () => {
