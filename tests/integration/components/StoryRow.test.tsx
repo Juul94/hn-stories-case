@@ -20,6 +20,11 @@ describe("StoryRow", () => {
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
   });
 
+  it("uses an h3 title under the list's h2 heading", () => {
+    render(<StoryRow story={story} />);
+    expect(screen.getByRole("heading", { level: 3, name: /A story/ })).toBeInTheDocument();
+  });
+
   it("links the author to their HN profile", () => {
     render(<StoryRow story={story} />);
     const link = screen.getByRole("link", { name: /alice/ });
