@@ -23,7 +23,8 @@ export function StoryList({ stories }: Props) {
         <span className={styles.headerScore} title="Sorteret efter score, laveste først">
           Score <span className={styles.sortArrow}>↑</span>
         </span>
-        <span>Historie</span>
+        <span />
+        {/* Keeps the grid columns aligned; the story column needs no label. */}
         <span>Forfatter</span>
         <span>Tidspunkt</span>
       </div>
