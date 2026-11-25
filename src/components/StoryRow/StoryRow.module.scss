@@ -159,8 +159,17 @@
 }
 
 .author {
+  // Decorative separator after the score; the no-break space keeps it with "af".
+  &::before {
+    content: "·\00a0" / "";
+  }
+
   @include tablet-up {
     grid-area: author;
+
+    &::before {
+      content: none;
+    }
   }
 }
 
