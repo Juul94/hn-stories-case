@@ -1,4 +1,5 @@
 import type { Story } from "@/lib/hn/types";
+import { StatusMessage } from "@/components/StatusMessage/StatusMessage";
 import { StoryRow } from "@/components/StoryRow/StoryRow";
 import styles from "./StoryList.module.scss";
 
@@ -6,6 +7,15 @@ type Props = { stories: Story[] };
 
 /** Ordered list, since the stories are sorted by score. */
 export function StoryList({ stories }: Props) {
+  const isEmpty = stories.length === 0;
+  if (isEmpty) {
+    return (
+      <StatusMessage title="Ingen historier lige nu" role="status">
+        Hacker News returnerede ingen gyldige historier. Prøv at hente nye.
+      </StatusMessage>
+    );
+  }
+
   return (
     <>
       {/* Visual column labels on desktop. Each row carries its own text labels for screen readers. */}
