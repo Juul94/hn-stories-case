@@ -50,6 +50,10 @@ $gutter: $space-4;
 $radius-box: 6px;
 $radius-button: 3px;
 
+// Story row height: fits a two-line title, the URL and the wrapped meta line, so rows look even.
+$row-min-height-mobile: 8.5rem;
+$row-min-height-wide: 6rem;
+
 // Smooth theme switch. Only applied inside the motion-safe mixin.
 $transition-theme:
   background-color 150ms ease,

@@ -1,7 +1,11 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-// Same list gap, box, padding and image size as the real rows, so the page does not jump.
+// Same list gap, box, padding, row height and image size as the real rows, so the page does not jump.
+.header {
+  visibility: hidden;
+}
+
 .list {
   display: grid;
   gap: $space-2;
@@ -14,10 +18,15 @@
   display: flex;
   gap: $space-3;
   align-items: flex-start;
+  min-height: $row-min-height-mobile;
   padding: $space-3;
   background: $color-box;
   border: 1px solid $color-line;
   border-radius: $radius-box;
+
+  @include tablet-up {
+    min-height: $row-min-height-wide;
+  }
 }
 
 .image,
