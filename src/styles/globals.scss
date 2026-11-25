@@ -1,8 +1,8 @@
 @use "variables" as *;
 @use "mixins" as *;
 
-:root {
-  color-scheme: light dark;
+@mixin light-theme {
+  color-scheme: light;
   --color-bg: #{$light-bg};
   --color-box: #{$light-box};
   --color-box-hover: #{$light-box-hover};
@@ -11,17 +11,33 @@
   --color-meta: #{$light-meta};
   --color-visited: #{$light-visited};
   --color-orange: #{$light-orange};
+}
 
-  @media (prefers-color-scheme: dark) {
-    --color-bg: #{$dark-bg};
-    --color-box: #{$dark-box};
-    --color-box-hover: #{$dark-box-hover};
-    --color-line: #{$dark-line};
-    --color-text: #{$dark-text};
-    --color-meta: #{$dark-meta};
-    --color-visited: #{$dark-visited};
-    --color-orange: #{$dark-orange};
+@mixin dark-theme {
+  color-scheme: dark;
+  --color-bg: #{$dark-bg};
+  --color-box: #{$dark-box};
+  --color-box-hover: #{$dark-box-hover};
+  --color-line: #{$dark-line};
+  --color-text: #{$dark-text};
+  --color-meta: #{$dark-meta};
+  --color-visited: #{$dark-visited};
+  --color-orange: #{$dark-orange};
+}
+
+// data-theme on <html> (set by the theme toggle) wins; without it, the system preference decides.
+:root {
+  @include light-theme;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include dark-theme;
   }
+}
+
+:root[data-theme="dark"] {
+  @include dark-theme;
 }
 
 *,
@@ -37,6 +53,10 @@ body {
   line-height: 1.4;
   color: $color-text;
   background: $color-bg;
+
+  @include motion-safe {
+    transition: $transition-theme;
+  }
 }
 
 a {

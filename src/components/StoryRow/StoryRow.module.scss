@@ -15,6 +15,10 @@
   border-radius: $radius-box;
   cursor: pointer;
 
+  @include motion-safe {
+    transition: $transition-theme;
+  }
+
   &:hover,
   &:has(.titleLink:focus-visible) {
     background: $color-box-hover;

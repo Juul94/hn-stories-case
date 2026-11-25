@@ -1,4 +1,5 @@
 import { RefreshButton } from "./RefreshButton";
+import { ThemeToggle } from "./ThemeToggle";
 import styles from "./TopBar.module.scss";
 
 export function TopBar() {
@@ -6,7 +7,10 @@ export function TopBar() {
     <header className={styles.bar}>
       <div className={styles.inner}>
         <h1 className={styles.title}>Hacker News</h1>
-        <RefreshButton />
+        <div className={styles.actions}>
+          <ThemeToggle />
+          <RefreshButton />
+        </div>
       </div>
     </header>
   );

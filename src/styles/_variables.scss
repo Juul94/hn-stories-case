@@ -56,6 +56,12 @@ $gutter: $space-4;
 $radius-box: 6px;
 $radius-button: 3px;
 
+// Smooth theme switch. Only applied inside the motion-safe mixin.
+$transition-theme:
+  background-color 150ms ease,
+  border-color 150ms ease,
+  color 150ms ease;
+
 // Breakpoints, mobile first. Use through the mixins in _mixins.scss.
 $breakpoint-tablet: 640px;
 $breakpoint-desktop: 1024px;
