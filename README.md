@@ -41,6 +41,7 @@ Første gang e2e køres: `npx playwright install chromium`.
 - Ingen gyldige historier giver en tom-tilstand i stedet for en tom liste.
 - Skeleton-rækker under indlæsning, uden animation ved reduced motion.
 - Layout virker fra 320px uden vandret scroll (testet i e2e).
+- Top-listen caches i 60 s, så samme seed kan give nogle få andre historier, når cachen er fornyet.
 
 ## Brug af AI
 
