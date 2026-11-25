@@ -2,9 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
+import { createSeed } from "@/utils/random";
 import styles from "./TopBar.module.scss";
 
-/** Re-renders the server page, which picks 10 new random stories. */
+/** Loads the page with a new seed, which picks 10 new random stories in the default sort. */
 export function RefreshButton() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -12,7 +13,7 @@ export function RefreshButton() {
   // aria-disabled instead of disabled, so the button keeps keyboard focus while loading.
   const refresh = () => {
     if (isPending) return;
-    startTransition(() => router.refresh());
+    startTransition(() => router.replace(`/?seed=${createSeed()}`));
   };
 
   return (

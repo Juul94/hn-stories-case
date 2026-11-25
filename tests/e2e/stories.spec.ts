@@ -42,6 +42,20 @@ test('"Vis 10 nye historier" loads a new set', async ({ page }) => {
   await expect(stories(page)).toHaveCount(10);
 });
 
+test("changing the sort reorders the same 10 stories", async ({ page }) => {
+  await page.goto("/?seed=e2e");
+  await expect(stories(page)).toHaveCount(10);
+  const before = await titles(page);
+
+  await page.getByLabel("Sortér efter").selectOption("score-desc");
+
+  await expect(page).toHaveURL(/[?&]seed=e2e&sort=score-desc/);
+  await expect.poll(() => titles(page)).not.toEqual(before);
+  expect([...(await titles(page))].sort()).toEqual([...before].sort());
+  const values = await scores(page);
+  expect(values).toEqual([...values].sort((a, b) => b - a));
+});
+
 test("keeps the chosen theme after a reload", async ({ page }) => {
   const html = page.locator("html");
 

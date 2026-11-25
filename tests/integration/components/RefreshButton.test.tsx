@@ -4,15 +4,15 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { RefreshButton } from "@/components/TopBar/RefreshButton";
 
 const mocks = vi.hoisted(() => ({
-  refresh: vi.fn(),
+  replace: vi.fn(),
   isPending: false,
 }));
 
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ refresh: mocks.refresh }),
+  useRouter: () => ({ replace: mocks.replace }),
 }));
 
-// Controls the pending state, since a mocked refresh resolves instantly.
+// Controls the pending state, since a mocked navigation resolves instantly.
 vi.mock("react", async (importOriginal) => {
   const react = await importOriginal<typeof import("react")>();
   return {
@@ -22,17 +22,18 @@ vi.mock("react", async (importOriginal) => {
 });
 
 beforeEach(() => {
-  mocks.refresh.mockClear();
+  mocks.replace.mockClear();
   mocks.isPending = false;
 });
 
 describe("RefreshButton", () => {
-  it("refreshes the page on click", async () => {
+  it("loads a new seed in the default sort on click", async () => {
     const user = userEvent.setup();
     render(<RefreshButton />);
 
     await user.click(screen.getByRole("button", { name: "Vis 10 nye historier" }));
-    expect(mocks.refresh).toHaveBeenCalledTimes(1);
+    expect(mocks.replace).toHaveBeenCalledTimes(1);
+    expect(mocks.replace).toHaveBeenCalledWith(expect.stringMatching(/^\/\?seed=[a-z0-9]{6}$/));
   });
 
   it("shows the loading label and ignores clicks while pending", async () => {
@@ -46,7 +47,7 @@ describe("RefreshButton", () => {
     expect(screen.getByText("Henter…")).toBeVisible();
 
     await user.click(button);
-    expect(mocks.refresh).not.toHaveBeenCalled();
+    expect(mocks.replace).not.toHaveBeenCalled();
   });
 
   // A natively disabled button drops keyboard focus in browsers.

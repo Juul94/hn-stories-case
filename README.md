@@ -26,6 +26,7 @@ Første gang e2e køres: `npx playwright install chromium`.
 
 - **Server Components hele vejen.** Data hentes på serveren; kun tema-knap, "Vis 10 nye" og fejlsiden er client components. Ingen API-nøgler eller fetch-logik i browseren.
 - **Tilfældigt udvalg pr. request.** `connection()` gør siden dynamisk, mens de enkelte HN-kald caches (top-liste 60 s, items 5 min, brugere 1 t).
+- **Sortering med seed.** `?seed=` styrer, hvilke 10 historier der trækkes, så `?sort=` kan sortere på serveren uden at trække nye. Uden `?sort` er rækkefølgen score stigende som krævet.
 - **Parallelle kald.** Items og brugere hentes med `Promise.allSettled`, så ét fejlende kald ikke vælter siden.
 - **Domæne adskilt fra generiske hjælpere.** Alt HN-specifikt ligger i `lib/hn/`, rene funktioner i `utils/` med unit-tests.
 - **Ingen UI-biblioteker.** SCSS Modules med variabler og mixins, én accentfarve, lyst/mørkt tema uden flash.
@@ -62,7 +63,6 @@ Projektet er bygget med Claude Code som par-programmør; jeg har styret retning,
 
 ## Hvad jeg ville gøre med mere tid
 
-- Sortering (score, tid, karma) styret af brugeren.
 - Tema-knappens ikon og label korrekt allerede før hydrering (i dag er ikonet tomt og labelen standard, indtil klienten har hydreret).
 - Visuel regressionstest og automatisk a11y-scan (axe) i e2e.
 - Opdatere GitHub Actions til versioner, der kører native på Node 24.

@@ -1,0 +1,29 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  align-items: center;
+  margin-bottom: $space-4;
+}
+
+.label {
+  font-size: $font-size-meta;
+  color: $color-meta;
+}
+
+.select {
+  min-height: 2.75rem; // Touch target.
+  padding: $space-1 $space-2;
+  font: inherit;
+  color: $color-text;
+  background: $color-box;
+  border: 1px solid $color-line-strong;
+  border-radius: $radius-button;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}

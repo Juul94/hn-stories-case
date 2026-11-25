@@ -1,12 +1,16 @@
+import { DEFAULT_SORT, type SortOption } from "@/lib/hn/sorting";
 import type { Story } from "@/lib/hn/types";
 import { StatusMessage } from "@/components/StatusMessage/StatusMessage";
 import { StoryRow } from "@/components/StoryRow/StoryRow";
 import styles from "./StoryList.module.scss";
 
-type Props = { stories: Story[] };
+type Props = { stories: Story[]; sort?: SortOption };
 
-/** Ordered list, since the stories are sorted by score. */
-export function StoryList({ stories }: Props) {
+// The score arrow only shows when the list is sorted by score.
+const SCORE_ARROWS: Partial<Record<SortOption, string>> = { "score-asc": "↑", "score-desc": "↓" };
+
+/** Ordered list, since the stories are sorted. */
+export function StoryList({ stories, sort = DEFAULT_SORT }: Props) {
   const isEmpty = stories.length === 0;
   if (isEmpty) {
     return (
@@ -20,8 +24,8 @@ export function StoryList({ stories }: Props) {
     <>
       {/* Visual column labels on desktop. Each row carries its own text labels for screen readers. */}
       <div className={styles.header} aria-hidden="true">
-        <span className={styles.headerScore} title="Sorteret efter score, laveste først">
-          Score <span className={styles.sortArrow}>↑</span>
+        <span className={styles.headerScore}>
+          Score <span className={styles.sortArrow}>{SCORE_ARROWS[sort]}</span>
         </span>
         <span />
         {/* Keeps the grid columns aligned; the story column needs no label. */}
