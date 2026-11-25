@@ -1,3 +1,25 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+:root {
+  color-scheme: light dark;
+  --color-bg: #{$light-bg};
+  --color-surface: #{$light-surface};
+  --color-text: #{$light-text};
+  --color-muted: #{$light-muted};
+  --color-border: #{$light-border};
+  --color-accent: #{$light-accent};
+
+  @media (prefers-color-scheme: dark) {
+    --color-bg: #{$dark-bg};
+    --color-surface: #{$dark-surface};
+    --color-text: #{$dark-text};
+    --color-muted: #{$dark-muted};
+    --color-border: #{$dark-border};
+    --color-accent: #{$dark-accent};
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -6,5 +28,32 @@
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: $font-sans;
+  line-height: 1.5;
+  color: $color-text;
+  background: $color-bg;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
